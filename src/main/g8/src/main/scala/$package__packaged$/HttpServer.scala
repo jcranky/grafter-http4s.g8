@@ -33,5 +33,5 @@ case class HttpServerConfig(ip: String, port: Int)
 
 object HttpServerConfig {
   implicit def reader: Reader[ApplicationConfig, HttpServerConfig] =
-    Reader(_.httpServer)
+    Reader(_.httpServerConfig)
 }
