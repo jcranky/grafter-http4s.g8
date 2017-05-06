@@ -9,8 +9,10 @@ import cats.Eval
 import cats.data.Reader
 import org.http4s.server.Server
 import org.http4s.server.blaze.BlazeBuilder
+import org.zalando.grafter.macros.reader
 import org.zalando.grafter.{Start, StartResult, Stop, StopResult}
 
+@reader[ApplicationConfig]
 case class HttpServer(restApi: RestApi, config: HttpServerConfig) extends Start with Stop {
   val pool : ExecutorService  = Executors.newCachedThreadPool()
 
@@ -30,8 +32,3 @@ case class HttpServer(restApi: RestApi, config: HttpServerConfig) extends Start 
 }
 
 case class HttpServerConfig(ip: String, port: Int)
-
-object HttpServerConfig {
-  implicit def reader: Reader[ApplicationConfig, HttpServerConfig] =
-    Reader(_.httpServerConfig)
-}

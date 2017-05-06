@@ -1,7 +1,9 @@
 package $package$.main
 
 import $package$.HttpServerConfig
+import org.zalando.grafter.macros.readers
 
+@readers
 case class ApplicationConfig(httpServerConfig: HttpServerConfig)
 
 object ApplicationConfig {

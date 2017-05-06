@@ -19,3 +19,5 @@ libraryDependencies ++= Seq(
   "org.http4s"     %% "http4s-circe"        % http4sVersion,
   "org.http4s"     %% "http4s-dsl"          % http4sVersion
 )
+
+addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
