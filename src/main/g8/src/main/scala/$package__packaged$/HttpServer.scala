@@ -14,11 +14,11 @@ import org.zalando.grafter.{Start, StartResult, Stop, StopResult}
 
 @reader[ApplicationConfig]
 case class HttpServer(restApi: RestApi, config: HttpServerConfig) extends Start with Stop {
-  val pool : ExecutorService  = Executors.newCachedThreadPool()
+  val pool : ExecutorService  = Executors.newFixedThreadPool(10)
 
   lazy val server: Server =
     BlazeBuilder
-      .bindHttp(config.port, config.ip)
+      .bindHttp(config.port, config.host)
       .mountService(restApi.services)
       .withServiceExecutor(pool)
       .start
@@ -31,4 +31,4 @@ case class HttpServer(restApi: RestApi, config: HttpServerConfig) extends Start 
     StopResult.eval("HttpServer")(server.shutdownNow())
 }
 
-case class HttpServerConfig(ip: String, port: Int)
+case class HttpServerConfig(host: String, port: Int)
