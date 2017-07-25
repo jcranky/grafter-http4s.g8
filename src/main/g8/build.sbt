@@ -8,9 +8,11 @@ val circeVersion = "0.7.1"
 val http4sVersion = "$http4s_version$"
 val grafterVersion = "$grafter_version$"
 val logbackVersion = "1.2.3"
+val scalametaVersion = "1.8.0"
 
 libraryDependencies ++= Seq(
   "org.zalando"    %% "grafter"             % grafterVersion,
+  "org.scalameta"  %% "contrib"             % scalametaVersion,
   "io.circe"       %% "circe-core"          % circeVersion,
   "io.circe"       %% "circe-generic"       % circeVersion,
   "io.circe"       %% "circe-jawn"          % circeVersion,
@@ -20,4 +22,4 @@ libraryDependencies ++= Seq(
   "org.http4s"     %% "http4s-dsl"          % http4sVersion
 )
 
-addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full)
+addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M8" cross CrossVersion.full)

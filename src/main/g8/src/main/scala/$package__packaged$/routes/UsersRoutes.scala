@@ -9,7 +9,7 @@ import org.http4s.circe._
 import org.http4s.dsl._
 import org.zalando.grafter.macros.reader
 
-@reader[ApplicationConfig]
+@reader
 case class UsersRoutes(itemsService: ItemsService) {
 
   val service = HttpService {
