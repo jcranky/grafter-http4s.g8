@@ -10,7 +10,7 @@ import scalaz.concurrent.Task
 object Application {
   def main(args: Array[String]): Unit = {
     val config = ApplicationConfig.config
-    val components = ApplicationComponents.reader(config).configure(config)
+    val components = ApplicationComponents.reader[ApplicationConfig].apply(config).configure(config)
 
     startServer(components.httpServer) match {
       case Right(()) =>
