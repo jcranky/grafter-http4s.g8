@@ -5,7 +5,7 @@ import $package$.HttpServer
 import org.zalando.grafter.macros.reader
 import org.zalando.grafter.syntax.rewriter._
 
-@reader[ApplicationConfig]
+@reader
 case class ApplicationComponents(httpServer: HttpServer) {
   def configure(config: ApplicationConfig): ApplicationComponents =
     this

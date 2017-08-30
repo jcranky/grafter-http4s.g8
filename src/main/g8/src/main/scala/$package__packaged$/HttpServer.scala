@@ -12,7 +12,7 @@ import org.http4s.server.blaze.BlazeBuilder
 import org.zalando.grafter.macros.reader
 import org.zalando.grafter.{Start, StartResult, Stop, StopResult}
 
-@reader[ApplicationConfig]
+@reader
 case class HttpServer(restApi: RestApi, config: HttpServerConfig) extends Start with Stop {
   val pool : ExecutorService  = Executors.newFixedThreadPool(10)
 

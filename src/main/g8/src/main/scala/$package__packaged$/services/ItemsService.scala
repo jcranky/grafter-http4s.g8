@@ -5,5 +5,5 @@ import $package$.repository.ItemsRepository
 
 import org.zalando.grafter.macros.reader
 
-@reader[ApplicationConfig]
+@reader
 case class ItemsService(repo: ItemsRepository)
