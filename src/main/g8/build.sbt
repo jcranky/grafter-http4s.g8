@@ -4,7 +4,7 @@ name := "$name;format="norm"$"
 version := "0.1.0-SNAPSHOT"
 scalaVersion := "$scala_version$"
 
-val circeVersion = "0.8.0"
+val circeVersion = "0.9.3"
 val http4sVersion = "$http4s_version$"
 val grafterVersion = "$grafter_version$"
 val logbackVersion = "1.2.3"
