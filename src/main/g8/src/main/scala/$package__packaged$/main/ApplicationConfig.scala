@@ -1,6 +1,5 @@
 package $package$.main
 
-import $package$.HttpServerConfig
 import org.zalando.grafter.macros.readers
 
 @readers
