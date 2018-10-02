@@ -18,4 +18,15 @@ libraryDependencies ++= Seq(
   "org.http4s"     %% "http4s-dsl"          % http4sVersion
 )
 
-addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-encoding", "UTF-8",
+  "-language:higherKinds",
+  "-language:postfixOps",
+  "-feature",
+  "-Ypartial-unification",
+)
+
+addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.6")
+addCompilerPlugin("org.scalamacros" % "paradise"       % "2.1.0" cross CrossVersion.full)
+
