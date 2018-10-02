@@ -10,9 +10,12 @@ import scalaz.concurrent.Task
 object Application {
   def main(args: Array[String]): Unit = {
     val config = ApplicationConfig.config
-    val components = ApplicationComponents.reader[ApplicationConfig].apply(config).configure(config)
+    val components = ApplicationComponents
+      .reader[ApplicationConfig]
+      .apply(config)
+      .configure(config)
 
-    startServer(components.httpServer) match {
+    startServer(components) match {
       case Right(()) =>
         println("Http4s Server Started successfully")
 
@@ -22,10 +25,13 @@ object Application {
     }
   }
 
-  def startServer(httpServer: HttpServer): Either[List[StartResult], Unit] = {
-    val results = Rewriter.start(httpServer).value
+  def startServer(components: ApplicationComponents): Either[List[StartResult], Unit] = {
+
+    val results = Rewriter.startAll(components).value
     if (results.forall(_.success)) {
-      val app = new ServerApp { def server(args: List[String]) = Task.delay(httpServer.server) }
+      val app = new ServerApp { 
+        def server(args: List[String]) = Task.delay(components.httpServer.server) 
+      }
 
       app.main(Array())
 

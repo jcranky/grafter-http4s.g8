@@ -1,7 +1,7 @@
 package $package$.repository
 
 import $package$.main.ApplicationConfig
-import org.zalando.grafter.macros.reader
+import org.zalando.grafter.macros.readerOf
 
-@reader[ApplicationConfig]
+@readerOf[ApplicationConfig]
 case class ItemsRepository()
