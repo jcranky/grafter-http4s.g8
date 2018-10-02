@@ -3,7 +3,7 @@
 
 Generate a http4s project wired with Grafter. Use the following command:
 
-```sbt new jcranky/grafter-http4s.g8 -b 0.18```
+```sbt new jcranky/grafter-http4s.g8 -b 0.19```
 
 then just enter the values you will be prompted for, `cd` to the folder
 generated for your project, and `run`:
