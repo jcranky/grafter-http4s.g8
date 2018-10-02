@@ -13,4 +13,3 @@ case class ApplicationComponents[F[_]](
     this
       .singletons
 }
-

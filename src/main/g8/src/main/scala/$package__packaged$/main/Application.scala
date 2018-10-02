@@ -1,12 +1,11 @@
 package $package$.main
 
-import fs2.{Stream, StreamApp}
-import fs2.StreamApp.ExitCode
-import cats.effect.{Effect, IO}
+import cats.implicits._
+import cats.effect.{ConcurrentEffect, Effect, ExitCode, IO, IOApp}
 
 import org.zalando.grafter.{Rewriter, StartResult}
 
-object Application extends StreamApp[IO] {
+object Application extends IOApp {
 
   val config = ApplicationConfig.config
 
@@ -14,19 +13,21 @@ object Application extends StreamApp[IO] {
     .apply(config)
     .configure(config)
 
-  def stream(args: List[String], requestShutdown: IO[Unit]): Stream[IO, ExitCode] = {
+  def run(args: List[String]): IO[ExitCode] = {
     val results = Rewriter.startAll(components).value
 
     if (results.forall(_.success)) {
       println("Http4s Server Started successfully")
-      components.httpServer.stream
+      components.httpServer
+        .stream
+        .compile
+        .drain
+        .as(ExitCode.Success)
     } else {
       println("Failed to start Http4s server")
       println(results.mkString("\n"))
-      Stream.eval(
-        requestShutdown
-          .map(_ => ExitCode.Success)
-      )
+      IO(ExitCode.Success)
     }
   }
 }
+
