@@ -17,17 +17,14 @@ object Application extends IOApp {
     val results = Rewriter.startAll(components).value
 
     if (results.forall(_.success)) {
-      println("Http4s Server Started successfully")
+      IO(println("Http4s Server Started successfully")) *>
       components.httpServer
         .stream
         .compile
         .drain
         .as(ExitCode.Success)
     } else {
-      println("Failed to start Http4s server")
-      println(results.mkString("\n"))
-      IO(ExitCode.Success)
+      IO(println(s"Failed to start Http4s server\n\${results.mkString("\n")}")).as(ExitCode.Success)
     }
   }
 }
-
